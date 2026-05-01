@@ -25,7 +25,7 @@ Unlike standard tutorial projects, this repository tackles real-world database i
 * **Insight:** Extracted the Top 3 best-selling SKUs within the top 5 high-demand categories (e.g., bed_bath_table, health_beauty). 
 * **Action:** Apply the 80/20 rule to maintain safety stock for these specific SKUs, preventing stockouts for highest-converting items.
 
-### 3. Intraday Sales Pacing & Automated OP Alerts (Prescriptive Analytics)
-* **Question:** How can we ensure we hit today's sales target, and how do we proactively fix it if we are falling behind?
-* **SQL Techniques:** `CTEs`, `EXTRACT()`, Window Function `SUM() OVER()`, Data Pivoting, and `CASE WHEN` rule engines.
-* **Action:** Built a cumulative hourly tracker comparing 'Today's Revenue' against the 'Twin Day'. If the current revenue falls more than 10% behind the Twin Day after 10 AM, the query generates an `ALERT` status for the Operation Team.
+### 3. Intraday Sales Pacing (Twin Sales Tracking)
+* **Question:** How can we track intraday sales performance to ensure we hit today's target compared to the exact same day last year (Twin Day)?
+* **SQL Techniques:** `CTEs`, `EXTRACT()`, Window Function `SUM() OVER()`, and Data Pivoting using `MAX(CASE WHEN...)`.
+* **Action:** Built a cumulative hourly tracking model. By shifting the historical date by exactly 52 weeks (-364 days) to align the day of the week, this query pivots the data to compare 'Today's Revenue' and 'Twin Day Revenue' side-by-side. The resulting `Revenue_Gap` metric allows the commercial team to monitor pacing hour-by-hour and identify exactly when sales momentum starts to lag compared to historical baselines.
